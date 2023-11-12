@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace N4ZV0Z_HFT_2023241.Models
 {
-    public class Employees
+    public class Employee
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,11 +32,11 @@ namespace N4ZV0Z_HFT_2023241.Models
 
         public virtual Publisher Publisher { get; set; }
 
-        public Employees()
+        public Employee()
         {
         }
 
-        public Employees(string line)
+        public Employee(string line)
         {
             string[] split = line.Split('#');
             EmployeeId = int.Parse(split[0]);
