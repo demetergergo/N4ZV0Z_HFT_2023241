@@ -16,12 +16,11 @@ namespace N4ZV0Z_HFT_2023241.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            if (builder.IsConfigured)
+            if (!builder.IsConfigured)
             {
-                string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Game.mdf;Integrated Security=True;MultipleActiveResultSets=true";
                 builder
                     .UseLazyLoadingProxies()
-                    .UseSqlServer(conn);
+                    .UseInMemoryDatabase("game");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,7 +48,7 @@ namespace N4ZV0Z_HFT_2023241.Repository
                 new Game("6#Whispers of Eldoria#4#98720#2000*03*22#8"),
                 new Game("10#Realm of Eternity 2#3#263280#2002*05*30#4"),
                 new Game("11#Legends of Mythos#8#36270#2001*03*25#7"),
-                new Game("12#Enchanted Realms#7#372890#20002*08*17#3"),
+                new Game("12#Enchanted Realms#7#372890#2002*08*17#3"),
                 new Game("13#Lost Kingdoms#2#21710#2014*06*25#5"),
                 new Game("14#Astral Ascendance#5#23790#2019*05*15#6"),
                 new Game("15#Whirlwind of Sorcery#5#237860#2018*11*23#6"),
