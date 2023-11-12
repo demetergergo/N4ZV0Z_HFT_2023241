@@ -28,7 +28,7 @@ namespace N4ZV0Z_HFT_2023241.Models
         [StringLength(240)]
         public string EmployeePosition { get; set; }
 
-        public int PublisherID { get; set; }
+        public int PublisherId { get; set; }
 
         public virtual Publisher Publisher { get; set; }
 
@@ -44,6 +44,7 @@ namespace N4ZV0Z_HFT_2023241.Models
             EmployeeLastName = split[2];
             EmployeeAge = int.Parse(split[3]);
             EmployeePosition = split[4];
+            PublisherId = int.Parse(split[5]);
         }
     }
 }
