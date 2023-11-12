@@ -18,10 +18,14 @@ namespace N4ZV0Z_HFT_2023241.Models
         [StringLength(240)]
         public string PublisherName { get; set; }
 
+        public virtual ICollection<Game> Games { get; set; }
 
+        public virtual ICollection<Employee> Employees { get; set; }
 
         public Publisher()
         {
+            Games = new HashSet<Game>();
+            Employees = new HashSet<Employee>();
         }
 
         public Publisher(string line)
@@ -29,6 +33,8 @@ namespace N4ZV0Z_HFT_2023241.Models
             string[] split = line.Split('#');
             PublisherId = int.Parse(split[0]);
             PublisherName = split[1];
+            Games = new HashSet<Game>();
+            Employees = new HashSet<Employee>();
         }
     }
 }

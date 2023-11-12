@@ -27,10 +27,7 @@ namespace N4ZV0Z_HFT_2023241.Models
 
         public int PublisherId { get; set; }
 
-        public int CategoryId { get; set; }
-
-
-
+        public virtual Publisher Publisher { get; set; }
 
         public Game()
         {
@@ -42,11 +39,10 @@ namespace N4ZV0Z_HFT_2023241.Models
             string[] split = line.Split('#');
             GameID = int.Parse(split[0]);
             Title = split[1];
-            Rating = double.Parse(split[5]);
-            Income = double.Parse(split[2]);
+            Rating = double.Parse(split[2]);
+            Income = double.Parse(split[3]);
             Release = DateTime.Parse(split[4].Replace('*', '.'));
-            PublisherId = int.Parse(split[3]);
-            CategoryId = int.Parse(split[3]);
+            PublisherId = int.Parse(split[5]);
         }
 
     }
