@@ -72,7 +72,7 @@ namespace N4ZV0Z_HFT_2023241.Logic
             {
                 gameTitle = a.Title,
                 DeveloperCount = a.Publisher.Employees.Count(x => x.EmployeePosition == "developer")
-            });
+            }).ToList();
         }
 
         public IEnumerable PublishersByAverageRating()
@@ -81,8 +81,21 @@ namespace N4ZV0Z_HFT_2023241.Logic
             {
                 PublisherName = grouped.Key,
                 ratingAverage = Math.Round(grouped.Average(b => b.Rating), 2)
-            }).OrderByDescending(c => c.ratingAverage);
+            }).OrderByDescending(c => c.ratingAverage).ToList();
             return earliest;
+        }
+        public IEnumerable RatingIncomeRatioPublisher()
+        {
+            return this.repo.ReadAll()
+                .GroupBy(game => game.Publisher.PublisherName)
+                .Select(group => new
+                {
+                    Publisher = group.Key,
+                    RatingIncomeRatio =  Math.Round(group.Average(game => game.Income) / group.Average(game => game.Rating))
+                })
+                .OrderByDescending(result => result.RatingIncomeRatio)
+                .ToList();
+
         }
     }
 }
