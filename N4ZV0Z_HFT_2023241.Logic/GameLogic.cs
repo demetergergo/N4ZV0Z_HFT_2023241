@@ -65,5 +65,13 @@ namespace N4ZV0Z_HFT_2023241.Logic
                  }).ToList();
             return earliest;
         }
+        public IEnumerable DevelopersCountAtGames()
+        {
+            return this.repo.ReadAll().Select(a => new
+            {
+                gameTitle = a.Title,
+                DeveloperCount = a.Publisher.Employees.Count(x => x.EmployeePosition == "developer")
+            });
+        }
     }
 }

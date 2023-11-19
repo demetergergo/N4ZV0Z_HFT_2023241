@@ -1,6 +1,7 @@
 ﻿using N4ZV0Z_HFT_2023241.Models;
 using N4ZV0Z_HFT_2023241.Repository;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,23 @@ namespace N4ZV0Z_HFT_2023241.Logic
         public void Update(Employee item)
         {
             this.repo.Update(item);
+        }
+        //non-CRUD
+        public IEnumerable YoungestEmployeeAtPublishers()
+        {
+            var youngest = this.repo.ReadAll().ToList().GroupBy(a => a.Publisher.PublisherCountry).Select(grouped => new
+            {
+                id = grouped.Key,
+                young = grouped.OrderBy(b => b.EmployeeAge).First()
+            })
+                .Select(result => new
+                {
+                    PublisherCountry = result.young.Publisher.PublisherCountry,
+                    FistName = result.young.EmployeeFirstName,
+                    LastName = result.young.EmployeeLastName,
+                    Age = result.young.EmployeeAge
+                }).ToList();
+            return youngest;
         }
     }
 }
