@@ -77,17 +77,17 @@ namespace N4ZV0Z_HFT_2023241.Repository
             modelBuilder.Entity<Employee>().HasData(new Employee[]
             {
                 //id#firstname#lastname#age#position#publisherid
-                new Employee("1#Demeter#Gergo#20#Developer#1"),
-                new Employee("2#Siem#Viktoria#22#CEO#1"),
-                new Employee("3#Vicc#Elek#45#Developer#1"),
+                new Employee("1#Demeter#Gergo#20#developer#1"),
+                new Employee("2#Siem#Viktoria#22#ceo#1"),
+                new Employee("3#Vicc#Elek#45#developer#1"),
 
-                new Employee("4#Aleksander#Kowalski#35#CEO#2"),
-                new Employee("5#Magdalena#Nowak#20#HR#2"),
-                new Employee("6#Krzysztof#Nowicki#68#Developer#2"),
+                new Employee("4#Aleksander#Kowalski#35#ceo#2"),
+                new Employee("5#Magdalena#Nowak#20#hr#2"),
+                new Employee("6#Krzysztof#Nowicki#68#developer#2"),
 
-                new Employee("7#Nagy#Bela#60#CEO#3"),
-                new Employee("8#Kis#Alma#24#HR#3"),
-                new Employee("9#Rizz#Levente#64#De#3"),
+                new Employee("7#Nagy#Bela#60#ceo#3"),
+                new Employee("8#Kis#Alma#24#hr#3"),
+                new Employee("9#Rizz#Levente#64#developer#3"),
 
                 new Employee("10#david#brown#31#engineer#4"),
                 new Employee("11#emily#davis#26#analyst#4"),
@@ -116,6 +116,7 @@ namespace N4ZV0Z_HFT_2023241.Repository
                 new Employee("28#victoria#campbell#39#developer#10"),
                 new Employee("29#william#turner#26#designer#10"),
                 new Employee("30#xander#cohen#44#engineer#10"),
+                new Employee("31#chad#coder#18#developer#10"),
             });
 
         }
