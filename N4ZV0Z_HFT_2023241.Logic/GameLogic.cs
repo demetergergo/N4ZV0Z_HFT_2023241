@@ -3,6 +3,7 @@ using N4ZV0Z_HFT_2023241.Repository;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace N4ZV0Z_HFT_2023241.Logic
 {
@@ -72,6 +73,16 @@ namespace N4ZV0Z_HFT_2023241.Logic
                 gameTitle = a.Title,
                 DeveloperCount = a.Publisher.Employees.Count(x => x.EmployeePosition == "developer")
             });
+        }
+
+        public IEnumerable PublishersByAverageRating()
+        {
+            var earliest = this.repo.ReadAll().ToList().GroupBy(a => a.Publisher.PublisherName).Select(grouped => new
+            {
+                PublisherName = grouped.Key,
+                ratingAverage = Math.Round(grouped.Average(b => b.Rating), 2)
+            }).OrderByDescending(c => c.ratingAverage);
+            return earliest;
         }
     }
 }
