@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace N4ZV0Z_HFT_2023241.Logic
 {
-    public class EmployeeLogic
+    public class EmployeeLogic : IEmployeeLogic
     {
         IRepository<Employee> repo;
 
@@ -20,7 +20,7 @@ namespace N4ZV0Z_HFT_2023241.Logic
 
         public void Create(Employee item)
         {
-            if(item.EmployeeFirstName.Length < 3)
+            if (item.EmployeeFirstName.Length < 3)
             {
                 throw new ArgumentException("First name too short");
             }

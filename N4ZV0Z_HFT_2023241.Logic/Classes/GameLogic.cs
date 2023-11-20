@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace N4ZV0Z_HFT_2023241.Logic
 {
-    public class GameLogic
+    public class GameLogic : IGameLogic
     {
         //interfacek hianyoznak
         IRepository<Game> repo;
@@ -59,11 +59,11 @@ namespace N4ZV0Z_HFT_2023241.Logic
                 mostIncome = grouped.OrderByDescending(b => b.Income).First()
             })
                 .Select(result => new
-                 {
-                     publisherName = result.mostIncome.Publisher.PublisherName,
-                     gameName = result.mostIncome.Title,
-                     gameIncome = result.mostIncome.Income,
-                 }).ToList();
+                {
+                    publisherName = result.mostIncome.Publisher.PublisherName,
+                    gameName = result.mostIncome.Title,
+                    gameIncome = result.mostIncome.Income,
+                }).ToList();
             return earliest;
         }
         public IEnumerable DevelopersCountAtGames()
@@ -91,7 +91,7 @@ namespace N4ZV0Z_HFT_2023241.Logic
                 .Select(group => new
                 {
                     Publisher = group.Key,
-                    RatingIncomeRatio =  Math.Round(group.Average(game => game.Income) / group.Average(game => game.Rating))
+                    RatingIncomeRatio = Math.Round(group.Average(game => game.Income) / group.Average(game => game.Rating))
                 })
                 .OrderByDescending(result => result.RatingIncomeRatio)
                 .ToList();
