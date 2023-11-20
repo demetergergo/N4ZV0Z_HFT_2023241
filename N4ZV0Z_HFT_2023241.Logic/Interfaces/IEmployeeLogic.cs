@@ -1,5 +1,5 @@
 ﻿using N4ZV0Z_HFT_2023241.Models;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace N4ZV0Z_HFT_2023241.Logic
@@ -11,6 +11,6 @@ namespace N4ZV0Z_HFT_2023241.Logic
         Employee Read(int id);
         IQueryable<Employee> ReadAll();
         void Update(Employee item);
-        IEnumerable YoungestEmployeeAtPublishers();
+        IEnumerable<EmployeeLogic.MostIncomeGamePerPublisherInfo> YoungestEmployeeAtPublishers();
     }
 }

@@ -52,21 +52,45 @@ namespace N4ZV0Z_HFT_2023241.Logic
             this.repo.Update(item);
         }
         //non-CRUD
-        public IEnumerable YoungestEmployeeAtPublishers()
+        #region YoungestEmployeeAtPublishers
+        public IEnumerable<MostIncomeGamePerPublisherInfo> YoungestEmployeeAtPublishers()
         {
-            var youngest = this.repo.ReadAll().ToList().GroupBy(a => a.Publisher.PublisherCountry).Select(grouped => new
+            return this.repo.ReadAll().ToList().GroupBy(a => a.Publisher.PublisherCountry).Select(grouped => new
             {
                 id = grouped.Key,
                 young = grouped.OrderBy(b => b.EmployeeAge).First()
             })
-                .Select(result => new
+                .Select(result => new MostIncomeGamePerPublisherInfo()
                 {
                     PublisherCountry = result.young.Publisher.PublisherCountry,
                     FistName = result.young.EmployeeFirstName,
                     LastName = result.young.EmployeeLastName,
                     Age = result.young.EmployeeAge
-                }).ToList();
-            return youngest;
+                }).ToArray();
         }
+        public class MostIncomeGamePerPublisherInfo
+        {
+            public string PublisherCountry { get; set; }
+            public string FistName { get; set; }
+            public string LastName { get; set; }
+            public double Age { get; set; }
+            public override bool Equals(object obj)
+            {
+                MostIncomeGamePerPublisherInfo b = obj as MostIncomeGamePerPublisherInfo;
+                if (b == null) return false;
+                else
+                {
+                    return this.PublisherCountry == b.PublisherCountry &&
+                            this.FistName == b.FistName &&
+                            this.LastName == b.LastName &&
+                            this.Age == b.Age;
+                }
+            }
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.PublisherCountry, this.FistName, this.LastName, this.Age);
+            }
+        }
+        #endregion
     }
 }
