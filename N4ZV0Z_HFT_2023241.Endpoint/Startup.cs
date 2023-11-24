@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using N4ZV0Z_HFT_2023241.Logic;
+using N4ZV0Z_HFT_2023241.Models;
+using N4ZV0Z_HFT_2023241.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +28,15 @@ namespace N4ZV0Z_HFT_2023241.Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<GameDbContext>();
+
+            services.AddTransient<IRepository<Game>, GameRepository>();
+            services.AddTransient<IRepository<Publisher>, PublisherRepository>();
+            services.AddTransient<IRepository<Employee>, EmployeeRepository>();
+
+            services.AddTransient<IGameLogic, GameLogic>();
+            services.AddTransient<IPublisherLogic, PublisherLogic>();
+            services.AddTransient<IEmployeeLogic, EmployeeLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
