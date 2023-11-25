@@ -8,36 +8,36 @@ namespace N4ZV0Z_HFT_2023241.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class GameController : ControllerBase
+    public class PublisherController : ControllerBase
     {
 
-        IGameLogic logic;
+        IPublisherLogic logic;
 
-        public GameController(IGameLogic logic)
+        public PublisherController(IPublisherLogic logic)
         {
             this.logic = logic;
         }
 
         [HttpGet]
-        public IEnumerable<Game> ReadAll()
+        public IEnumerable<Publisher> ReadAll()
         {
             return this.logic.ReadAll();
         }
 
         [HttpGet("{id}")]
-        public Game Read(int id)
+        public Publisher Read(int id)
         {
             return this.logic.Read(id);
         }
 
         [HttpPost]
-        public void Create([FromBody] Game value)
+        public void Create([FromBody] Publisher value)
         {
             this.logic.Create(value);
         }
 
         [HttpPut]
-        public void Update([FromBody] Game value)
+        public void Update([FromBody] Publisher value)
         {
             this.logic.Update(value);
         }
