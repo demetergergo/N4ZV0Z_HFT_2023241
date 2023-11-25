@@ -11,6 +11,6 @@ namespace N4ZV0Z_HFT_2023241.Logic
         Employee Read(int id);
         IQueryable<Employee> ReadAll();
         void Update(Employee item);
-        IEnumerable<EmployeeLogic.MostIncomeGamePerPublisherInfo> YoungestEmployeeAtPublishers();
+        IEnumerable<EmployeeLogic.YoungestEmployeeAtPublishersInfo> YoungestEmployeeAtPublishers();
     }
 }

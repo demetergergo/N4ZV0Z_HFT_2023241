@@ -53,14 +53,14 @@ namespace N4ZV0Z_HFT_2023241.Logic
         }
         //non-CRUD
         #region YoungestEmployeeAtPublishers
-        public IEnumerable<MostIncomeGamePerPublisherInfo> YoungestEmployeeAtPublishers()
+        public IEnumerable<YoungestEmployeeAtPublishersInfo> YoungestEmployeeAtPublishers()
         {
             return this.repo.ReadAll().ToList().GroupBy(a => a.Publisher.PublisherCountry).Select(grouped => new
             {
                 id = grouped.Key,
                 young = grouped.OrderBy(b => b.EmployeeAge).First()
             })
-                .Select(result => new MostIncomeGamePerPublisherInfo()
+                .Select(result => new YoungestEmployeeAtPublishersInfo()
                 {
                     PublisherCountry = result.young.Publisher.PublisherCountry,
                     FistName = result.young.EmployeeFirstName,
@@ -68,7 +68,7 @@ namespace N4ZV0Z_HFT_2023241.Logic
                     Age = result.young.EmployeeAge
                 }).ToArray();
         }
-        public class MostIncomeGamePerPublisherInfo
+        public class YoungestEmployeeAtPublishersInfo
         {
             public string PublisherCountry { get; set; }
             public string FistName { get; set; }
@@ -76,7 +76,7 @@ namespace N4ZV0Z_HFT_2023241.Logic
             public double Age { get; set; }
             public override bool Equals(object obj)
             {
-                MostIncomeGamePerPublisherInfo b = obj as MostIncomeGamePerPublisherInfo;
+                YoungestEmployeeAtPublishersInfo b = obj as YoungestEmployeeAtPublishersInfo;
                 if (b == null) return false;
                 else
                 {
