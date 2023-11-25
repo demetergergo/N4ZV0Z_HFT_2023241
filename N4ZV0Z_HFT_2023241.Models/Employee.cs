@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace N4ZV0Z_HFT_2023241.Models
 {
@@ -29,7 +30,7 @@ namespace N4ZV0Z_HFT_2023241.Models
         public string EmployeePosition { get; set; }
 
         public int PublisherId { get; set; }
-
+        [JsonIgnore]
         public virtual Publisher Publisher { get; set; }
 
         public Employee()

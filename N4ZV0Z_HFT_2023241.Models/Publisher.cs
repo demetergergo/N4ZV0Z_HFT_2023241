@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace N4ZV0Z_HFT_2023241.Models
 {
@@ -19,7 +20,7 @@ namespace N4ZV0Z_HFT_2023241.Models
         public string PublisherName { get; set; }
 
         public string PublisherCountry { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<Game> Games { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }
