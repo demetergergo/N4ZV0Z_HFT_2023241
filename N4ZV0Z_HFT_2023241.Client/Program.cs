@@ -1,9 +1,14 @@
 ﻿using ConsoleTools;
 using MovieDbApp.Client;
 using N4ZV0Z_HFT_2023241.Models;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Numerics;
+using System.Reflection;
+using System.Xml.XPath;
 
 namespace N4ZV0Z_HFT_2023241.Client
 {
@@ -32,8 +37,10 @@ namespace N4ZV0Z_HFT_2023241.Client
                 string lastname = Console.ReadLine();
                 Console.Write("Enter Employees Age: ");
                 int age = int.Parse(Console.ReadLine());
+                Console.Write("Enter Employees PublisherId: ");
+                int pubid = int.Parse(Console.ReadLine());
 
-                rest.Post(new Employee() { EmployeeFirstName = firstname, EmployeeLastName = lastname, EmployeeAge = age}, "employee");
+                rest.Post(new Employee() { EmployeeFirstName = firstname, EmployeeLastName = lastname, EmployeeAge = age, PublisherId = pubid}, "employee");
             }
         }
         static void List(string entity)
@@ -121,6 +128,26 @@ namespace N4ZV0Z_HFT_2023241.Client
                 rest.Delete(id, "employee");
             }
         }
+        static void StatisticsWriter(string entity)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            List<JToken> result = rest.Get<JToken>($"Stat/{entity}");
+            ;
+            foreach (JToken item in result)
+            {
+                var val = item.Values();
+                foreach (JToken item2 in val)
+                {
+                    Console.Write(item2.Path + ": " + item2 + "\t");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                ;
+            }
+            Console.ResetColor();
+            Console.ReadLine();
+        }
+
 
         static void Main(string[] args)
         {
@@ -148,11 +175,20 @@ namespace N4ZV0Z_HFT_2023241.Client
                 .Add("Update", () => Update("Employee"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var StatisticsSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("DevelopersCountAtGames", () => StatisticsWriter("DevelopersCountAtGames"))
+                .Add("MostIncomeGamePerPublisher", () => StatisticsWriter("MostIncomeGamePerPublisher"))
+                .Add("PublishersByAverageRating", () => StatisticsWriter("PublishersByAverageRating"))
+                .Add("RatingIncomeRatioPublisher", () => StatisticsWriter("RatingIncomeRatioPublisher"))
+                .Add("YoungestEmployeeAtPublishers", () => StatisticsWriter("YoungestEmployeeAtPublishers"))
+                .Add("Exit", ConsoleMenu.Close);
+
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Games", () => GameSubMenu.Show())
                 .Add("Publishers", () => PublisherSubMenu.Show())
                 .Add("Employees", () => EmployeeSubMenu.Show())
+                .Add("Statistics", () => StatisticsSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();

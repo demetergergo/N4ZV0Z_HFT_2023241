@@ -2,6 +2,7 @@
 using N4ZV0Z_HFT_2023241.Logic;
 using System.Collections.Generic;
 using System.Linq;
+using static N4ZV0Z_HFT_2023241.Logic.EmployeeLogic;
 using static N4ZV0Z_HFT_2023241.Logic.GameLogic;
 
 namespace MovieDbApp.Endpoint.Controllers
@@ -11,10 +12,12 @@ namespace MovieDbApp.Endpoint.Controllers
     public class StatController : ControllerBase
     {
         IGameLogic logic;
+        IEmployeeLogic logic2;
 
-        public StatController(IGameLogic logic)
+        public StatController(IGameLogic logic, IEmployeeLogic logic2)
         {
             this.logic = logic;
+            this.logic2 = logic2;
         }
         [HttpGet]
         public IEnumerable<MostIncomeGamePerPublisherInfo> MostIncomeGamePerPublisher()
@@ -37,8 +40,11 @@ namespace MovieDbApp.Endpoint.Controllers
         {
             return this.logic.RatingIncomeRatioPublisher();
         }
-
-
+        [HttpGet]
+        public IEnumerable<YoungestEmployeeAtPublishersInfo> YoungestEmployeeAtPublishers()
+        {
+            return this.logic2.YoungestEmployeeAtPublishers();
+        }
     }
 }
 
