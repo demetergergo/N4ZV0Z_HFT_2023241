@@ -3,11 +3,13 @@ using N4ZV0Z_HFT_2023241.Logic;
 using N4ZV0Z_HFT_2023241.Models;
 using N4ZV0Z_HFT_2023241.Repository;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using static Microsoft.EntityFrameworkCore.Internal.AsyncLock;
+using static N4ZV0Z_HFT_2023241.Logic.GameLogic;
 
 namespace N4ZV0Z_HFT_2023241.Test
 {
@@ -35,6 +37,25 @@ namespace N4ZV0Z_HFT_2023241.Test
                         PublisherId = 1,
                         PublisherName = "Testpub1",
                         PublisherCountry = "Testpub1",
+                        Employees = new List<Employee>
+                        {
+                            new Employee
+                            {
+                                EmployeeId = 1,
+                                EmployeeFirstName = "1first1",
+                                EmployeeLastName = "1last1",
+                                EmployeeAge = 18,
+                                EmployeePosition = "marketing"
+                            },
+                            new Employee
+                            {
+                                EmployeeId = 2,
+                                EmployeeFirstName = "2first1",
+                                EmployeeLastName = "2last1",
+                                EmployeeAge = 51,
+                                EmployeePosition = "developer"
+                            }
+                        }
                     }
                 },
 
@@ -51,6 +72,25 @@ namespace N4ZV0Z_HFT_2023241.Test
                         PublisherId = 1,
                         PublisherName = "Testpub1",
                         PublisherCountry = "Testpub1",
+                        Employees = new List<Employee>
+                        {
+                            new Employee
+                            {
+                                EmployeeId = 1,
+                                EmployeeFirstName = "1first1",
+                                EmployeeLastName = "1last1",
+                                EmployeeAge = 18,
+                                EmployeePosition = "marketing"
+                            },
+                            new Employee
+                            {
+                                EmployeeId = 2,
+                                EmployeeFirstName = "2first1",
+                                EmployeeLastName = "2last1",
+                                EmployeeAge = 51,
+                                EmployeePosition = "developer"
+                            }
+                        }
                     }
                 },
 
@@ -67,6 +107,33 @@ namespace N4ZV0Z_HFT_2023241.Test
                         PublisherId = 2,
                         PublisherName = "Testpub2",
                         PublisherCountry = "Testpub2",
+                        Employees = new List<Employee>
+                        {
+                            new Employee
+                            {
+                                EmployeeId = 3,
+                                EmployeeFirstName = "1first2",
+                                EmployeeLastName = "1last2",
+                                EmployeeAge = 18,
+                                EmployeePosition = "analyst"
+                            },
+                            new Employee
+                            {
+                                EmployeeId = 4,
+                                EmployeeFirstName = "2first2",
+                                EmployeeLastName = "2last2",
+                                EmployeeAge = 51,
+                                EmployeePosition = "designer"
+                            },
+                            new Employee
+                            {
+                                EmployeeId = 5,
+                                EmployeeFirstName = "3first2",
+                                EmployeeLastName = "3last2",
+                                EmployeeAge = 30,
+                                EmployeePosition = "developer"
+                            }
+                        }
                     }
                 },
 
@@ -83,6 +150,33 @@ namespace N4ZV0Z_HFT_2023241.Test
                         PublisherId = 2,
                         PublisherName = "Testpub2",
                         PublisherCountry = "Testpub2",
+                        Employees = new List<Employee>
+                        {
+                            new Employee
+                            {
+                                EmployeeId = 3,
+                                EmployeeFirstName = "1first2",
+                                EmployeeLastName = "1last2",
+                                EmployeeAge = 18,
+                                EmployeePosition = "analyst"
+                            },
+                            new Employee
+                            {
+                                EmployeeId = 4,
+                                EmployeeFirstName = "2first2",
+                                EmployeeLastName = "2last2",
+                                EmployeeAge = 51,
+                                EmployeePosition = "designer"
+                            },
+                            new Employee
+                            {
+                                EmployeeId = 5,
+                                EmployeeFirstName = "3first2",
+                                EmployeeLastName = "3last2",
+                                EmployeeAge = 30,
+                                EmployeePosition = "developer"
+                            }
+                        }
                     }
                 },
 
@@ -107,6 +201,56 @@ namespace N4ZV0Z_HFT_2023241.Test
 
             //ASSERT
             mockGameRepo.Verify(r => r.Create(game), Times.Once);
+        }
+        [Test]
+        public void MostIncomeGamePerPublisherTest()
+        {
+            var actual = logicGame.MostIncomeGamePerPublisher().ToList();
+            var expected = new List<MostIncomeGamePerPublisherInfo> 
+            {
+                new MostIncomeGamePerPublisherInfo
+                {
+                    publisherName = "Testpub1",
+                    gameIncome = 2500,
+                    gameName = "Testgam2"
+                },
+                new MostIncomeGamePerPublisherInfo
+                {
+                    publisherName = "Testpub2",
+                    gameIncome = 1700,
+                    gameName = "Testgam3"
+                },
+            };
+            Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        public void DevelopersCountAtGamesTest()
+        {
+            var actual = logicGame.DevelopersCountAtGames().ToList();
+            var expected = new List<DevelopersCountAtGamesInfo>
+            {
+                new DevelopersCountAtGamesInfo
+                {
+                    gameTitle = "Testgam1",
+                    DeveloperCount = 1
+                },
+                new DevelopersCountAtGamesInfo
+                {
+                    gameTitle = "Testgam2",
+                    DeveloperCount = 1
+                },
+                new DevelopersCountAtGamesInfo
+                {
+                    gameTitle = "Testgam3",
+                    DeveloperCount = 1
+                },
+                new DevelopersCountAtGamesInfo
+                {
+                    gameTitle = "Testgam4",
+                    DeveloperCount = 1
+                }
+            };
+            Assert.AreEqual(actual, expected);
         }
     }
 }
