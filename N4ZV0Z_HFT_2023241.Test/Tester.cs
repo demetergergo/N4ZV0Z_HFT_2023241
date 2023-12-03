@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using static Microsoft.EntityFrameworkCore.Internal.AsyncLock;
+using static N4ZV0Z_HFT_2023241.Logic.EmployeeLogic;
 using static N4ZV0Z_HFT_2023241.Logic.GameLogic;
 
 namespace N4ZV0Z_HFT_2023241.Test
@@ -17,7 +18,9 @@ namespace N4ZV0Z_HFT_2023241.Test
     public class Tester
     {
         GameLogic logicGame;
+        EmployeeLogic logicEmployee;
         Mock<IRepository<Game>> mockGameRepo;
+        Mock<IRepository<Employee>> mockEmployeeRepo;
         [SetUp]
         public void Init()
         {
@@ -183,6 +186,89 @@ namespace N4ZV0Z_HFT_2023241.Test
             }.AsQueryable()) ;
 
             logicGame = new GameLogic(mockGameRepo.Object);
+
+            mockEmployeeRepo = new Mock<IRepository<Employee>>();
+            mockEmployeeRepo.Setup(m => m.ReadAll()).Returns(new List<Employee> 
+            {
+                new Employee
+                {
+                    EmployeeId = 1,
+                    EmployeeFirstName = "1first1",
+                    EmployeeLastName = "1last1",
+                    EmployeeAge = 18,
+                    EmployeePosition = "marketing",
+                    PublisherId = 1,
+                    Publisher = new Publisher
+                    {
+                        PublisherId = 1,
+                        PublisherName = "Testpub1",
+                        PublisherCountry = "Testpub1"
+                    }
+                },
+                new Employee
+                {
+                    EmployeeId = 2,
+                    EmployeeFirstName = "2first1",
+                    EmployeeLastName = "2last1",
+                    EmployeeAge = 51,
+                    EmployeePosition = "developer",
+                    PublisherId = 1,
+                    Publisher = new Publisher
+                    {
+                        PublisherId = 1,
+                        PublisherName = "Testpub1",
+                        PublisherCountry = "Testpub1"
+                    }
+                },
+                new Employee
+                {
+                    EmployeeId = 3,
+                    EmployeeFirstName = "1first2",
+                    EmployeeLastName = "1last2",
+                    EmployeeAge = 18,
+                    EmployeePosition = "analyst",
+                    PublisherId = 2,
+                    Publisher = new Publisher
+                    {
+                        PublisherId = 2,
+                        PublisherName = "Testpub2",
+                        PublisherCountry = "Testpub2"
+                    }
+                },
+                new Employee
+                {
+                    EmployeeId = 4,
+                    EmployeeFirstName = "2first2",
+                    EmployeeLastName = "2last2",
+                    EmployeeAge = 51,
+                    EmployeePosition = "designer",
+                    PublisherId = 2,
+                    Publisher = new Publisher
+                    {
+                        PublisherId = 2,
+                        PublisherName = "Testpub2",
+                        PublisherCountry = "Testpub2"
+                    }
+
+                },
+                new Employee
+                {
+                    EmployeeId = 5,
+                    EmployeeFirstName = "3first2",
+                    EmployeeLastName = "3last2",
+                    EmployeeAge = 30,
+                    EmployeePosition = "developer",
+                    PublisherId = 2,
+                    Publisher = new Publisher
+                    {
+                        PublisherId = 2,
+                        PublisherName = "Testpub2",
+                        PublisherCountry = "Testpub2"
+                    }
+                }
+            }.AsQueryable()) ;
+
+            logicEmployee = new EmployeeLogic(mockEmployeeRepo.Object);
         }
 
         [Test]
@@ -251,6 +337,69 @@ namespace N4ZV0Z_HFT_2023241.Test
                 }
             };
             Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        public void PublishersByAverageRatingTest()
+        {
+            var actual = logicGame.PublishersByAverageRating().ToList();
+
+            var expected = new List<PublishersByAverageRatingInfo>
+            {
+                new PublishersByAverageRatingInfo
+                {
+                    PublisherName = "Testpub1",
+                    ratingAverage = 5.5
+                },
+                new PublishersByAverageRatingInfo
+                {
+                    PublisherName = "Testpub2",
+                    ratingAverage = 5.5
+                }
+            };
+            Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        public void RatingIncomeRatioPublisherTest()
+        {
+            var expected = logicGame.RatingIncomeRatioPublisher().ToList();
+
+            var result = new List<RatingIncomeRatioPublisherinfo>
+            {
+                new RatingIncomeRatioPublisherinfo
+                {
+                    Publisher = "Testpub2",
+                    RatingIncomeRatio = 473
+                },
+                new RatingIncomeRatioPublisherinfo
+                {
+                    Publisher = "Testpub1",
+                    RatingIncomeRatio = 364
+                }
+            };
+        }
+        [Test]
+        public void YoungestEmployeeAtPublishersTest()
+        {
+            var expected = logicEmployee.YoungestEmployeeAtPublishers().ToList();
+
+            var result = new List<YoungestEmployeeAtPublishersInfo>
+            {
+                new YoungestEmployeeAtPublishersInfo
+                {
+                    PublisherCountry = "Testpub1",
+                    FistName = "1first1",
+                    LastName = "1last1",
+                    Age = 18
+                },
+                new YoungestEmployeeAtPublishersInfo
+                {
+                    PublisherCountry = "Testpub2",
+                    FistName = "1first2",
+                    LastName = "1last2",
+                    Age = 18
+                }
+            };
+            Assert.AreEqual(expected, result);
         }
     }
 }
