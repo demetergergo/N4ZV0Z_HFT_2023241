@@ -19,8 +19,10 @@ namespace N4ZV0Z_HFT_2023241.Test
     {
         GameLogic logicGame;
         EmployeeLogic logicEmployee;
+        PublisherLogic logicPublisher;
         Mock<IRepository<Game>> mockGameRepo;
         Mock<IRepository<Employee>> mockEmployeeRepo;
+        Mock<IRepository<Publisher>> mockPublisherRepo;
         [SetUp]
         public void Init()
         {
@@ -269,6 +271,24 @@ namespace N4ZV0Z_HFT_2023241.Test
             }.AsQueryable()) ;
 
             logicEmployee = new EmployeeLogic(mockEmployeeRepo.Object);
+
+            mockPublisherRepo = new Mock<IRepository<Publisher>>();
+            mockPublisherRepo.Setup(m => m.ReadAll()).Returns(new List<Publisher> 
+            { 
+                new Publisher
+                {
+                    PublisherId = 1,
+                        PublisherName = "Testpub1",
+                        PublisherCountry = "Testpub1"
+                },
+                new Publisher
+                {
+                    PublisherId = 2,
+                        PublisherName = "Testpub2",
+                        PublisherCountry = "Testpub2"
+                }
+            }.AsQueryable());
+            logicPublisher = new PublisherLogic(mockPublisherRepo.Object);
         }
 
         [Test]
@@ -287,6 +307,43 @@ namespace N4ZV0Z_HFT_2023241.Test
 
             //ASSERT
             mockGameRepo.Verify(r => r.Create(game), Times.Once);
+        }
+        [Test]
+        public void CreateEmployeeTest()
+        {
+            var employee = new Employee { EmployeeFirstName = "teszterfirst", EmployeeLastName = "teszterlast" };
+            try
+            {
+                //ACT
+                logicEmployee.Create(employee);
+            }
+            catch
+            {
+
+            }
+
+            //ASSERT
+            mockEmployeeRepo.Verify(r => r.Create(employee), Times.Once);
+        }
+        [Test] 
+        public void CreatePublisherTest()
+        {
+            var publisher = new Publisher
+            {
+                PublisherName = "test"
+            };
+            try
+            {
+                //ACT
+                logicPublisher.Create(publisher);
+            }
+            catch
+            {
+
+            }
+
+            //ASSERT
+            mockPublisherRepo.Verify(r => r.Create(publisher), Times.Once);
         }
         [Test]
         public void MostIncomeGamePerPublisherTest()
@@ -400,6 +457,39 @@ namespace N4ZV0Z_HFT_2023241.Test
                 }
             };
             Assert.AreEqual(expected, result);
+        }
+        [Test]
+        public void DeleteGameTest()
+        {
+            var id = 1;
+            try
+            {
+                //ACT
+                logicGame.Delete(id);
+            }
+            catch
+            {
+
+            }
+
+            //ASSERT
+            mockGameRepo.Verify(r => r.Delete(1), Times.Once);
+        }
+        [Test]
+        public void DeleteEmployeeTest()
+        {
+            var id = 1;
+            try
+            {
+                //ACT
+                logicEmployee.Delete(id);
+            }
+            catch
+            {
+            }
+
+            //ASSERT
+            mockEmployeeRepo.Verify(r => r.Delete(1), Times.Once);
         }
     }
 }
