@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using N4ZV0Z_HFT_2023241.Endpoint.Services;
 using N4ZV0Z_HFT_2023241.Logic;
 using N4ZV0Z_HFT_2023241.Models;
 using N4ZV0Z_HFT_2023241.Repository;
@@ -39,6 +40,8 @@ namespace N4ZV0Z_HFT_2023241.Endpoint
             services.AddTransient<IGameLogic, GameLogic>();
             services.AddTransient<IPublisherLogic, PublisherLogic>();
             services.AddTransient<IEmployeeLogic, EmployeeLogic>();
+
+            services.AddSignalR();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -73,6 +76,7 @@ namespace N4ZV0Z_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

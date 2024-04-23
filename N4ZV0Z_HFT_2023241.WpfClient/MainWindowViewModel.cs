@@ -42,7 +42,7 @@ namespace N4ZV0Z_HFT_2023241.WpfClient
 
         public MainWindowViewModel()
         {
-            Games = new RestCollection<Game>("http://localhost:35916/", "game");
+            Games = new RestCollection<Game>("http://localhost:35916/", "game", "hub");
             CreateGameCommand = new RelayCommand(() =>
             {
                 Games.Add(new Game()
