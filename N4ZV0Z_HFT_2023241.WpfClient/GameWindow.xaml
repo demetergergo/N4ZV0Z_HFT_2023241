@@ -1,0 +1,33 @@
+﻿<Window x:Class="N4ZV0Z_HFT_2023241.WpfClient.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:N4ZV0Z_HFT_2023241.WpfClient"
+        mc:Ignorable="d"
+        Title="Game editor" Height="450" Width="800">
+    <Window.DataContext>
+        <local:GameWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Title}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Content="Title" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedGame.Title}" Padding="10" Margin="0,0,0,30"/>
+            <Button Content="Create Game" Command="{Binding CreateGameCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Game" Command="{Binding DeleteGameCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Game" Command="{Binding UpdateGameCommand}" Margin="10" Padding="10"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

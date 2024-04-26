@@ -12,59 +12,25 @@ namespace N4ZV0Z_HFT_2023241.WpfClient
 {
     public class MainWindowViewModel : ObservableRecipient
     {
-        public RestCollection<Game> Games { get; set; }
+            public ICommand GameListCommand { get; set; }
+            public ICommand PublisherlistListCommand { get; set; }
+            public ICommand EmployeeListCommand { get; set; }
 
-        private Game selectedGame;
-
-        public Game SelectedGame
-        {
-            get { return selectedGame; }
-            set 
-            {
-                if (value != null)
-                {
-                    selectedGame = new Game()
-                    {
-                        Title = value.Title,
-                        GameID = value.GameID
-                    };
-                }
-                OnPropertyChanged();
-                (DeleteGameCommand as RelayCommand).NotifyCanExecuteChanged();
-            }
-        } 
-
-
-
-        public ICommand CreateGameCommand { get; set; } 
-        public ICommand DeleteGameCommand { get; set; } 
-        public ICommand UpdateGameCommand { get; set; } 
 
         public MainWindowViewModel()
         {
-            Games = new RestCollection<Game>("http://localhost:35916/", "game", "hub");
-            CreateGameCommand = new RelayCommand(() =>
+            GameListCommand = new RelayCommand(() =>
             {
-                Games.Add(new Game()
-                {
-                    Title = SelectedGame.Title
-                }); 
+                new GameWindow().ShowDialog();
             });
 
-            UpdateGameCommand = new RelayCommand(() => 
+            PublisherlistListCommand = new RelayCommand(() =>
             {
-                Games.Update(selectedGame);
             });
 
-            DeleteGameCommand = new RelayCommand(() =>
+            EmployeeListCommand = new RelayCommand(() =>
             {
-                Games.Delete(SelectedGame.GameID);
-            }, 
-            () =>
-            {
-                return SelectedGame != null;
             });
-            selectedGame = new Game();
         }
     }
 }
