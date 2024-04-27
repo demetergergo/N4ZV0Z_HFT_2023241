@@ -19,7 +19,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Button Grid.Column="0" Grid.Row="0" Content="Games" Command="{Binding GameListCommand}"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Publishers" Command=""/>
+        <Button Grid.Column="1" Grid.Row="0" Content="Publishers" Command="{Binding PublisherlistListCommand}"/>
         <Button Grid.Column="0" Grid.Row="1" Content="Employees" Command="{Binding EmployeeListCommand}"/>
         <Button Grid.Column="1" Grid.Row="1" Content="Statistics" Command=""/>
     </Grid>
