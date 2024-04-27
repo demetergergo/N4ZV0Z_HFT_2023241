@@ -61,16 +61,16 @@ namespace N4ZV0Z_HFT_2023241.WpfClient
 
             UpdateEmployeeCommand = new RelayCommand(() =>
             {
-                Employees.Update(selectedEmployee);
+                Employees.Update(SelectedEmployee);
             });
 
             DeleteEmployeeCommand = new RelayCommand(() =>
             {
-                Employees.Delete(selectedEmployee.EmployeeId);
+                Employees.Delete(SelectedEmployee.EmployeeId);
             },
             () =>
             {
-                return selectedEmployee != null;
+                return SelectedEmployee != null;
             });
             selectedEmployee = new Employee();
         }

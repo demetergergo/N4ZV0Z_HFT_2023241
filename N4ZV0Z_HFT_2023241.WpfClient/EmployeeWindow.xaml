@@ -22,10 +22,13 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="1">
-            <Label Content="Title" Background="LightBlue" Padding="10"/>
-            <TextBox Text="{Binding SelectedEmployee.EmployeeFirstName}" Padding="10" Margin="0,0,0,30"/>
-            <TextBox Text="{Binding SelectedEmployee.EmployeeLastName}" Padding="10" Margin="0,0,0,30"/>
-            <TextBox Text="{Binding SelectedEmployee.EmployeeAge}" Padding="10" Margin="0,0,0,30"/>
+            <Label Content="First Name" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedEmployee.EmployeeFirstName}" Padding="10"/>
+            <Label Content="Last Name" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedEmployee.EmployeeLastName}" Padding="10"/>
+            <Label Content="Age" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedEmployee.EmployeeAge}" Padding="10"/>
+            <Label Content="PublisherID" Background="LightBlue" Padding="10"/>
             <TextBox Text="{Binding SelectedEmployee.PublisherId}" Padding="10" Margin="0,0,0,30"/>
             <Button Content="Create Employee" Command="{Binding CreateEmployeeCommand}" Margin="10" Padding="10"/>
             <Button Content="Delete Employee" Command="{Binding DeleteEmployeeCommand}" Margin="10" Padding="10"/>
