@@ -22,7 +22,7 @@ function displayEmployee() {
             `<button type="button" onclick="removeEmployee(${t.employeeId})">Delete</button>` +
             `<button type="button" onclick="showupdateEmployee(${t.employeeId})">Update</button>`
             + "</td></tr>";
-        console.log(t.employeeFirstName);
+        //console.log(t.employeeFirstName);
     })
 }
 function removeEmployee(id) {

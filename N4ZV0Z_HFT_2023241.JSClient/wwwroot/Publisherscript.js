@@ -22,7 +22,7 @@ function displayPublisher() {
             `<button type="button" onclick="removePublisher(${t.publisherId})">Delete</button>` +
             `<button type="button" onclick="showupdatePublisher(${t.publisherId})">Update</button>`
             + "</td></tr>";
-        console.log(t.publisherName);
+        //console.log(t.publisherName);
     })
 }
 function removePublisher(id) {

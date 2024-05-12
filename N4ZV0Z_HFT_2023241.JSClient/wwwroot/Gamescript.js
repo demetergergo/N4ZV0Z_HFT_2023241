@@ -77,7 +77,6 @@ function displayGame() {
             `<button type="button" onclick="removeGame(${t.gameID})">Delete</button>` +
             `<button type="button" onclick="showupdateGame(${t.gameID})">Update</button>`
             + "</td></tr>";
-        console.log(t.title);
     })
 }
 function removeGame(id) {

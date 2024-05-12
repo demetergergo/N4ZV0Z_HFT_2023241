@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Actor Catalog</h1>
+    <h1>Game Catalog</h1>
     <div id="formdiv">
-        <label>Actor Name</label>
+        <label>Game Name</label>
         <input type="text" id="gametitle" />
         <button type="button" onclick="createGame()">Add Game</button>
     </div>
 
     <div id="updateformdiv">
-        <label>Actor Name</label>
+        <label>Game Name</label>
         <input type="text" id="gametitletoupdate" />
         <button type="button" onclick="updateGame()">Update Game</button>
     </div>
@@ -94,10 +94,37 @@
         </tbody>
     </table>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-        <script src="Gamescript.js"></script>
-        <script src="Publisherscript.js"></script>
-        <script src="Employeescript.js"></script>
-        <script src="Statisticsscript.js"></script>
+    <h1>MostIncomeGamePerPublisher</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>publisherName</th>
+                <th>gameName</th>
+                <th>gameIncome</th>
+            </tr>
+        </thead>
+        <tbody id="resultcrud2">
+            <tr>
+        </tbody>
+    </table>
+
+    <h1>PublishersByAverageRating</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>PublisherName</th>
+                <th>ratingAverage</th>
+            </tr>
+        </thead>
+        <tbody id="resultcrud3">
+            <tr>
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="Gamescript.js"></script>
+    <script src="Publisherscript.js"></script>
+    <script src="Employeescript.js"></script>
+    <script src="Statisticsscript.js"></script>
 </body>
 </html>
