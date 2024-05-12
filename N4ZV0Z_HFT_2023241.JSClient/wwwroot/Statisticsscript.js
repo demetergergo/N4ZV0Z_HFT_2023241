@@ -2,6 +2,7 @@
     await getDevelopersCountAtGames()
     await getMostIncomeGamePerPublisher()
     await getPublishersByAverageRating()
+    await getRatingIncomeRatioPublisher()
 }
 getDevelopersCountAtGames()
 
@@ -73,8 +74,34 @@ function displayPublishersByAverageRating() {
     PublishersByAverageRatingStat.forEach(t => {
         document.querySelector('#resultcrud3').innerHTML +=
             `<tr>
-          <td>${t.PublisherName}</td>
+          <td>${t.publisherName}</td>
           <td>${t.ratingAverage}</td>
           </tr>`
     })
+
+    //RatingIncomeRatioPublisher
+    getRatingIncomeRatioPublisher()
+
+    let RatingIncomeRatioPublisherStat = []
+
+    async function getRatingIncomeRatioPublisher() {
+        await fetch('http://localhost:35916/stat/ratingincomeratiopublisher')
+            .then(x => x.json())
+            .then(y => {
+                RatingIncomeRatioPublisherStat = y
+                console.log(RatingIncomeRatioPublisherStat)
+                displayRatingIncomeRatioPublisher()
+            })
+    }
+
+    function displayRatingIncomeRatioPublisher() {
+        document.querySelector('#resultcrud4').innerHTML = ""
+        RatingIncomeRatioPublisherStat.forEach(t => {
+            document.querySelector('#resultcrud4').innerHTML +=
+                `<tr>
+          <td>${t.publisher}</td>
+          <td>${t.ratingIncomeRatio}</td>
+          </tr>`
+        })
+    }
 }
