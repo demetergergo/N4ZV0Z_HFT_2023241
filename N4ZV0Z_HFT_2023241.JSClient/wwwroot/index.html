@@ -10,13 +10,13 @@
     <div id="formdiv">
         <label>Actor Name</label>
         <input type="text" id="title" />
-        <button type="button" onclick="create()">Add Game</button>
+        <button type="button" onclick="createGame()">Add Game</button>
     </div>
     
     <div id="updateformdiv">
         <label>Actor Name</label>
         <input type="text" id="titletoupdate" />
-        <button type="button" onclick="update()">Update Game</button>
+        <button type="button" onclick="updateGame()">Update Game</button>
     </div>
     <table>
         <thead>
@@ -26,11 +26,11 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="resultarea">
+        <tbody id="gameresultarea">
             <tr>
         </tbody>
     </table>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <script src="script.js"></script>
+    <script src="Gamescript.js"></script>
 </body>
 </html>

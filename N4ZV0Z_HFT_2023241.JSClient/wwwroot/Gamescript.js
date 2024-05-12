@@ -3,7 +3,7 @@ let connection = null;
 
 let gameIDtoUpdate = -1;
 
-getdata();
+getdatagame();
 setupSignalR();
 
 
@@ -14,14 +14,14 @@ function setupSignalR() {
         .build();
 
     connection.on("GameCreated", (user, message) => {
-        getdata();
+        getdatagame();
     });
 
     connection.on("GameDeleted", (user, message) => {
-        getdata();
+        getdatagame();
     });
     connection.on("GameUpdated", (user, message) => {
-        getdata();
+        getdatagame();
     });
 
     connection.onclose(async () => {
@@ -38,28 +38,29 @@ async function start() {
         setTimeout(start, 5000);
     }
 };
-async function getdata() {
+async function getdatagame() {
     await fetch('http://localhost:35916/game')
         .then(x => x.json())
         .then(y => {
             games = y;
             //console.log(games);
-            display();
+            displayGame();
         }); 
 }
 
-function display() {
+function displayGame() {
+    document.getElementById('gameresultarea').innerHTML = "";
     games.forEach(t => {
-        document.getElementById('resultarea').innerHTML +=
+        document.getElementById('gameresultarea').innerHTML +=
             "<tr><td>" + t.gameID + "</td><td>"
             + t.title + "</td><td>" +
-            `<button type="button" onclick="remove(${t.gameID})">Delete</button>` +
-            `<button type="button" onclick="showupdate(${t.gameID})">Update</button>`
+            `<button type="button" onclick="removeGame(${t.gameID})">Delete</button>` +
+            `<button type="button" onclick="showupdateGame(${t.gameID})">Update</button>`
             + "</td></tr>";
         console.log(t.title);
     })
 }
-function remove(id) {
+function removeGame(id) {
     fetch('http://localhost:35916/game/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
@@ -68,19 +69,19 @@ function remove(id) {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getdata();
+            getdatagame();
         })
         .catch((error) => { console.error('Error:', error); });
 
 }
 
-function showupdate(id) {
+function showupdateGame(id) {
     document.getElementById('titletoupdate').value = games.find(x => x['gameID'] == id)['title'];
     document.getElementById('updateformdiv').style.display = 'flex';
     gameIDtoUpdate = id;
 }
 
-function update() {
+function updateGame() {
     document.getElementById('updateformdiv').style.display = 'none';
     let name = document.getElementById('titletoupdate').value;
     fetch('http://localhost:35916/game', {
@@ -92,12 +93,12 @@ function update() {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getdata();
+            getdatagame();
         })
         .catch((error) => { console.error('Error:', error); });
 
 }
-function create() {
+function createGame() {
     let name = document.getElementById('title').value;
     fetch('http://localhost:35916/game', {
         method: 'POST',
@@ -108,7 +109,7 @@ function create() {
         .then(data =>
         {
             console.log('Success:', data);
-            getdata();
+            getdatagame();
         })
         .catch((error) => { console.error('Error:', error); });
         
