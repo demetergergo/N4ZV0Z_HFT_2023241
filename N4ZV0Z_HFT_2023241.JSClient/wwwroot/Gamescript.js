@@ -23,6 +23,26 @@ function setupSignalR() {
     connection.on("GameUpdated", (user, message) => {
         getdatagame();
     });
+    connection.on("PublisherCreated", (user, message) => {
+        getdatapublisher();
+    });
+
+    connection.on("PublisherDeleted", (user, message) => {
+        getdatapublisher();
+    });
+    connection.on("PublisherUpdated", (user, message) => {
+        getdatapublisher();
+    });
+    connection.on("EmployeeCreated", (user, message) => {
+        getdataemployee();
+    });
+
+    connection.on("EmployeeDeleted", (user, message) => {
+        getdataemployee();
+    });
+    connection.on("EmployeeUpdated", (user, message) => {
+        getdataemployee();
+    });
 
     connection.onclose(async () => {
         await start();
@@ -76,14 +96,14 @@ function removeGame(id) {
 }
 
 function showupdateGame(id) {
-    document.getElementById('titletoupdate').value = games.find(x => x['gameID'] == id)['title'];
+    document.getElementById('gametitletoupdate').value = games.find(x => x['gameID'] == id)['title'];
     document.getElementById('updateformdiv').style.display = 'flex';
     gameIDtoUpdate = id;
 }
 
 function updateGame() {
     document.getElementById('updateformdiv').style.display = 'none';
-    let name = document.getElementById('titletoupdate').value;
+    let name = document.getElementById('gametitletoupdate').value;
     fetch('http://localhost:35916/game', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
@@ -99,7 +119,7 @@ function updateGame() {
 
 }
 function createGame() {
-    let name = document.getElementById('title').value;
+    let name = document.getElementById('gametitle').value;
     fetch('http://localhost:35916/game', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },

@@ -9,13 +9,13 @@
     <h1>Actor Catalog</h1>
     <div id="formdiv">
         <label>Actor Name</label>
-        <input type="text" id="title" />
+        <input type="text" id="gametitle" />
         <button type="button" onclick="createGame()">Add Game</button>
     </div>
-    
+
     <div id="updateformdiv">
         <label>Actor Name</label>
-        <input type="text" id="titletoupdate" />
+        <input type="text" id="gametitletoupdate" />
         <button type="button" onclick="updateGame()">Update Game</button>
     </div>
     <table>
@@ -30,7 +30,60 @@
             <tr>
         </tbody>
     </table>
+
+    <h1>Publisher Catalog</h1>
+    <div id="formdiv">
+        <label>Publisher Name</label>
+        <input type="text" id="publishertitle" />
+        <button type="button" onclick="createPublisher()">Add Publisher</button>
+    </div>
+
+    <div id="publisherupdateformdiv">
+        <label>Publisher Name</label>
+        <input type="text" id="publishertitletoupdate" />
+        <button type="button" onclick="updatePublisher()">Update Publisher</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="publisherresultarea">
+            <tr>
+        </tbody>
+    </table>
+
+    <h1>Employee Catalog</h1>
+    <div id="formdiv">
+        <label>Employee Name</label>
+        <input type="text" id="employeetitle" />
+        <button type="button" onclick="createEmployee()">Add Employee</button>
+    </div>
+
+    <div id="employeeupdateformdiv">
+        <label>Employee Name</label>
+        <input type="text" id="employeetitletoupdate" />
+        <button type="button" onclick="updateEmployee()">Update Employee</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="employeeresultarea">
+            <tr>
+        </tbody>
+    </table>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="Gamescript.js"></script>
+    <script src="Publisherscript.js"></script>
+    <script src="Employeescript.js"></script>
 </body>
 </html>

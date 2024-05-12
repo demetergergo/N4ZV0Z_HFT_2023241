@@ -28,9 +28,42 @@ th {
     #updateformdiv label {
         font-weight: bolder;
     }
+#publisherupdateformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #publisherupdateformdiv label, button, input {
+        margin: 10px;
+        padding: 5px;
+    }
+
+    #publisherupdateformdiv label {
+        font-weight: bolder;
+    }
+#employeeupdateformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #employeeupdateformdiv label, button, input {
+        margin: 10px;
+        padding: 5px;
+    }
+
+    #employeeupdateformdiv label {
+        font-weight: bolder;
+    }
 #formdiv {
     display: flex;
     flex-direction: column; 
+    margin-bottom: 20px;
+}
+#formdiv {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 20px;
 }
 #formdiv label, button, input{
